@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8AE9E084-CB6A-41AE-B54F-B04016446B79}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TRLSwingers</RootNamespace>
+    <AssemblyName>TRLSwingers</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.13.1\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.13.1\lib\net45\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pitchers\Pitcher.cs" />
+    <Compile Include="PlayerComparer\PlayerConstants.cs" />
+    <Compile Include="PlayerComparer\PrintPlayerComparerService.cs" />
+    <Compile Include="PlayerComparer\PlayerComparerHelper.cs" />
+    <Compile Include="Rankings\PostDraftRanking.cs" />
+    <Compile Include="Rankings\PrintPostDraftRankingsService.cs" />
+    <Compile Include="Rankings\Ranking.cs" />
+    <Compile Include="Rankings\PostDraftRankingsGenerator.cs" />
+    <Compile Include="Rankings\RankingGenerator.cs" />
+    <Compile Include="SiteCodes\SiteCodeHelper.cs" />
+    <Compile Include="SitePlayer\SitePlayerRepository.cs" />
+    <Compile Include="SitePlayer\SitePlayer.cs" />
+    <Compile Include="RmlPlayer\RmlPlayer.cs" />
+    <Compile Include="RmlPlayer\RmlPlayerBuilder.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="PlayerOfTheWeek.cs" />
+    <Compile Include="PowerRankings\PowerRanking.cs" />
+    <Compile Include="PowerRankings\PowerRankingGenerator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Returners\PrintReturnerService.cs" />
+    <Compile Include="Returners\Returner.cs" />
+    <Compile Include="Returners\ReturnerBuilder.cs" />
+    <Compile Include="RmlPlayer\RmlPlayerRepository.cs" />
+    <Compile Include="SiteCodes\SiteCode.cs" />
+    <Compile Include="Standings\Standing.cs" />
+    <Compile Include="Standings\StandingsGenerator.cs" />
+    <Compile Include="Teams\TeamRepository.cs" />
+    <Compile Include="Teams\TeamBuilder.cs" />
+    <Compile Include="Trophies\NfcDivisionChampionshipTrophy.cs" />
+    <Compile Include="Trophies\AfcDivisionChampionshipTrophy.cs" />
+    <Compile Include="Trophies\HighestScoringSeasonTrophy.cs" />
+    <Compile Include="Trophies\BottomRankedSeasonTrophy.cs" />
+    <Compile Include="Trophies\DefensivePlayerOfTheYearTrophy.cs" />
+    <Compile Include="Trophies\OffensivePlayerOfTheYearTrophy.cs" />
+    <Compile Include="Trophies\TopRankedSeasonTrophy.cs" />
+    <Compile Include="Trophies\DefensivePlayerOfTheWeekTrophy.cs" />
+    <Compile Include="Trophies\OffensivePlayerOfTheWeekTrophy.cs" />
+    <Compile Include="Trophies\LoserOfTheWeekTrophy.cs" />
+    <Compile Include="Trophies\BallerOfTheWeekTrophy.cs" />
+    <Compile Include="Trophies\SevenHundredClubTrophy.cs" />
+    <Compile Include="Trophies\SixHundredClubTrophy.cs" />
+    <Compile Include="Trophies\FiveHundredClubTrophy.cs" />
+    <Compile Include="Trophies\ITrophy.cs" />
+    <Compile Include="Trophies\TrophyAssigner.cs" />
+    <Compile Include="Trophies\TrophyWriter.cs" />
+    <Compile Include="Weeks\Score.cs" />
+    <Compile Include="SitePlayer\SitePlayerBuilder.cs" />
+    <Compile Include="Teams\Team.cs" />
+    <Compile Include="Trophies\TrophyConstants.cs" />
+    <Compile Include="Trophies\Trophy.cs" />
+    <Compile Include="Weeks\WeekRepository.cs" />
+    <Compile Include="Weeks\WeekBuilder.cs" />
+    <Compile Include="Weeks\Week.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="rmlPlayers.json" />
+    <None Include="sitePlayers.json" />
+    <None Include="teams.json" />
+    <None Include="weeks.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.40.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.40.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.40.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.40.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+  </Target>
+</Project>
