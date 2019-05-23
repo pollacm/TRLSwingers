@@ -107,33 +107,23 @@ namespace TRLSwingers
                 
                 var playerNote = dataPitcher.FindElement(By.XPath("./td[2]/div/div/span/a"));
 
-                var completedNoteOpen = false;
-                while (!completedNoteOpen)
-                {
-                    try
-                    {
-                        playerNote.Click();
-                        completedNoteOpen = true;
-                    }
-                    catch
-                    {
-                        Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
-                    }
-                }
-                
+                ClickPlayerNote(playerNote);
+
                 Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
 
                 var stars = driver.FindElements(By.XPath("//div[(contains(@class, 'yui3-ysplayernote-surround-R')) and not(contains(@class, 'yui3-ysplayernote-hidden'))]/div/div[2]/div/div/div/div/div/div/div/p[contains(@class, 'rating-value')]/span[contains(@class, 'F-negative')]"));
+                var availableStars = driver.FindElements(By.XPath("//div[(contains(@class, 'yui3-ysplayernote-surround-R')) and not(contains(@class, 'yui3-ysplayernote-hidden'))]/div/div[2]/div/div/div/div/div/div/div/p[contains(@class, 'rating-value')]/span[contains(@class, 'F-icon')]"));
                 var timesWaitingForPlayerNoteToOpen = 0;
-                while (stars.Count == 0)
+                while (availableStars.Count == 0)
                 {
                     Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
                     stars = driver.FindElements(By.XPath("//div[(contains(@class, 'yui3-ysplayernote-surround-R')) and not(contains(@class, 'yui3-ysplayernote-hidden'))]/div/div[2]/div/div/div/div/div/div/div/p[contains(@class, 'rating-value')]/span[contains(@class, 'F-negative')]"));
+                    availableStars = driver.FindElements(By.XPath("//div[(contains(@class, 'yui3-ysplayernote-surround-R')) and not(contains(@class, 'yui3-ysplayernote-hidden'))]/div/div[2]/div/div/div/div/div/div/div/p[contains(@class, 'rating-value')]/span[contains(@class, 'F-icon')]"));
 
                     timesWaitingForPlayerNoteToOpen++;
                     if (timesWaitingForPlayerNoteToOpen % 5 == 0)
                     {
-                        playerNote.Click();
+                        ClickPlayerNote(playerNote);
                     }
                 }
                 pitcher.Stars = stars.Count;
@@ -165,51 +155,36 @@ namespace TRLSwingers
                         }
                     }
 
-                    var pitcherRepository = new PitcherRepository();
-                    var pitchersToRemove = pitcherRepository.GetPitchers();
-                    var containsStringWhenRemovingPitchers = string.Empty;
-                    var firstRemovedPitcherDone = false;
-                    foreach (var pitcherToRemove in pitchersToRemove)
+                    var hasPitchersThatCanBeRemoved = ClickButtonToRemovePitcher(driver);
+
+                    if (hasPitchersThatCanBeRemoved)
                     {
-                        if (!firstRemovedPitcherDone)
+                        var addedRemovePitcher = false;
+                        var addedRemovePitcherCount = 0;
+                        while (!addedRemovePitcher)
                         {
-                            containsStringWhenRemovingPitchers += $"contains(text(), '{pitcherToRemove}')";
-                        }
-                        else
-                        {
-                            containsStringWhenRemovingPitchers += $" or contains(text(), '{pitcherToRemove}')";
-                        }
+                            if (addedRemovePitcherCount % 5 == 0)
+                            {
+                                ClickButtonToRemovePitcher(driver);
+                            }
+                            try
+                            {
+                                driver.FindElement(By.XPath("//input[@id='submit-add-drop-button']")).Submit();
+                                addedRemovePitcher = true;
+                            }
+                            catch
+                            {
+                                Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                            }
 
-                        firstRemovedPitcherDone = true;
-                    }
-
-                    ClickButtonToRemovePitcher(containsStringWhenRemovingPitchers, driver);
-
-                    var addedRemovePitcher = false;
-                    var addedRemovePitcherCount = 0;
-                    while (!addedRemovePitcher)
-                    {
-                        if (addedRemovePitcherCount % 5 == 0)
-                        {
-                            ClickButtonToRemovePitcher(containsStringWhenRemovingPitchers, driver);
-                        }
-                        try
-                        {
-                            driver.FindElement(By.XPath("//input[@id='submit-add-drop-button']")).Submit();
-                            addedRemovePitcher = true;
-                        }
-                        catch
-                        {
-                            Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                            addedRemovePitcherCount++;
                         }
 
-                        addedRemovePitcherCount++;
-                    }
-
-                    var confirmationMessage = driver.FindElements(By.XPath("//div[contains(@class,'Alert-confirmation')]"));
-                    if (confirmationMessage.Any())
-                    {
-                        pitchersSwapped++;
+                        var confirmationMessage = driver.FindElements(By.XPath("//div[contains(@class,'Alert-confirmation')]"));
+                        if (confirmationMessage.Any())
+                        {
+                            pitchersSwapped++;
+                        }
                     }
                 }
 
@@ -229,8 +204,41 @@ namespace TRLSwingers
             //Refresh Pitcher Names
         }
 
-        private static void ClickButtonToRemovePitcher(string containsStringWhenRemovingPitchers, ChromeDriver driver)
+        private static void ClickPlayerNote(IWebElement playerNote)
         {
+            var completedNoteOpen = false;
+            while (!completedNoteOpen)
+            {
+                try
+                {
+                    playerNote.Click();
+                    completedNoteOpen = true;
+                }
+                catch
+                {
+                    Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                }
+            }
+        }
+
+        private static bool ClickButtonToRemovePitcher(ChromeDriver driver)
+        {
+            var hasPitchersThatCanBeRemoved = false;
+            var containsStringWhenRemovingPitchers = string.Empty;
+            var firstRemovedPitcherDone = false;
+            foreach (var pitcherToRemove in PitchersToNotReplace)
+            {
+                if (!firstRemovedPitcherDone)
+                {
+                    containsStringWhenRemovingPitchers += $"contains(text(), '{pitcherToRemove}')";
+                }
+                else
+                {
+                    containsStringWhenRemovingPitchers += $" or contains(text(), '{pitcherToRemove}')";
+                }
+
+                firstRemovedPitcherDone = true;
+            }
             //table[@id='statTable-drop-2']/tbody/tr/td[2]/div/div/div/div/a/parent::div/parent::div/parent::div/parent::div/parent::td/div/div/div[2]/div/span[not(span)]/parent::div/parent::div/parent::div/parent::div/parent::td/parent::tr
 
             //table[@id='statTable-drop-2']/tbody/tr/td[2]/div/div/div/div/a[contains(text(), 'Bundy') or contains(text(), 'Richards')]/parent::div/parent::div/parent::div/parent::div/parent::td/parent::tr/td[2]/div/div/div/div/a/parent::div/parent::div/parent::div/parent::div/parent::td/div/div/div[2]/div/span[not(span)]/parent::div/parent::div/parent::div/parent::div/parent::td/parent::tr/td[1]/div/button
@@ -259,7 +267,11 @@ namespace TRLSwingers
                         Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
                     }
                 }
+
+                hasPitchersThatCanBeRemoved = true;
             }
+
+            return hasPitchersThatCanBeRemoved;
         }
 
         //need to add to slack channel and send updates for adds
