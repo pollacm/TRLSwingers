@@ -1,4 +1,6 @@
-﻿namespace TRLSwingers.Pitchers
+﻿using System.Linq;
+
+namespace TRLSwingers.Pitchers
 {
     public class Pitcher
     {
@@ -10,5 +12,7 @@
         {
             get { return Average + (Stars * .5); }
         }
+
+        public string LastName => Name.Split(' ').Last();
     }
 }

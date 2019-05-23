@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pitchers\Pitcher.cs" />
+    <Compile Include="Pitchers\PitcherRepository.cs" />
     <Compile Include="PlayerComparer\PlayerConstants.cs" />
     <Compile Include="PlayerComparer\PrintPlayerComparerService.cs" />
     <Compile Include="PlayerComparer\PlayerComparerHelper.cs" />
@@ -112,6 +113,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Pitchers.json" />
     <None Include="rmlPlayers.json" />
     <None Include="sitePlayers.json" />
     <None Include="teams.json" />
