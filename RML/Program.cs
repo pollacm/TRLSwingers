@@ -17,8 +17,8 @@ namespace TRLSwingers
 
 
 
-        //private static readonly string RosterPage = "https://baseball.fantasysports.yahoo.com/b1/125071/7";
-        //private static readonly string PlayerPage = "https://baseball.fantasysports.yahoo.com/b1/125071/players?status=A&pos=S_P&cut_type=33&stat1=S_AL30&myteam=0&sort=PTS&sdir=1";
+        private static readonly string RosterPage = "https://baseball.fantasysports.yahoo.com/b1/125071/7";
+        private static readonly string PlayerPage = "https://baseball.fantasysports.yahoo.com/b1/125071/players?status=A&pos=S_P&cut_type=33&stat1=S_AL30&myteam=0&sort=PTS&sdir=1";
         private static List<string> PitchersToNotReplace = new List<string>()
         {
             "Verlander",
@@ -29,8 +29,8 @@ namespace TRLSwingers
         };
         private static readonly string EmailAddressForLogin = "pollacm";
 
-        private static readonly string RosterPage = "https://baseball.fantasysports.yahoo.com/b1/189961/1";
-        private static readonly string PlayerPage = "https://baseball.fantasysports.yahoo.com/b1/189961/players?status=A&pos=S_P&cut_type=33&stat1=S_AL30&myteam=0&sort=AR&sdir=1";
+        //private static readonly string RosterPage = "https://baseball.fantasysports.yahoo.com/b1/189961/1";
+        //private static readonly string PlayerPage = "https://baseball.fantasysports.yahoo.com/b1/189961/players?status=A&pos=S_P&cut_type=33&stat1=S_AL30&myteam=0&sort=AR&sdir=1";
 
         private static void Main(string[] args)
         {
