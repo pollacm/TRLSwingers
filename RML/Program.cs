@@ -23,11 +23,7 @@ namespace TRLSwingers
             "Berríos",
             "Clevinger",
             "Jansen",
-            "Vázquez",
-            "Doolittle",
-            "Vasquez",
-            "Tanaka",
-            "Harvey"
+            "Vázquez"
         };
         private static readonly string EmailAddressForLogin = "pollacm";
 
