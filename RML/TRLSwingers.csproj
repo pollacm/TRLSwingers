@@ -80,6 +80,9 @@
     <Compile Include="Returners\ReturnerBuilder.cs" />
     <Compile Include="RmlPlayer\RmlPlayerRepository.cs" />
     <Compile Include="SiteCodes\SiteCode.cs" />
+    <Compile Include="Slack\AccessToken.cs" />
+    <Compile Include="Slack\SlackClient.cs" />
+    <Compile Include="Slack\SlackClientTest.cs" />
     <Compile Include="Standings\Standing.cs" />
     <Compile Include="Standings\StandingsGenerator.cs" />
     <Compile Include="Teams\TeamRepository.cs" />
