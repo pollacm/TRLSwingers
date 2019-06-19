@@ -101,46 +101,25 @@ namespace TRLSwingers
 
             var pitcher1 = new Pitcher
             {
-                Name = "Marco Gonzales"
+                Name = "Madison Bumgarner"
             };
 
             AddPitcher(driver, pitcher1);
 
             var pitcher4 = new Pitcher
             {
-                Name = "Steven Matz"
+                Name = "Dylan Bundy"
             };
 
             AddPitcher(driver, pitcher4);
 
             var pitcher2 = new Pitcher
             {
-                Name = "Andrew Heaney"
+                Name = "Tanner Roark"
             };
 
             AddPitcher(driver, pitcher2);
             
-
-            var pitcher5 = new Pitcher
-            {
-                Name = "Brad Keller"
-            };
-
-            AddPitcher(driver, pitcher5);
-
-            var pitcher3 = new Pitcher
-            {
-                Name = "Trevor Williams"
-            };
-
-            AddPitcher(driver, pitcher3);
-
-            var pitcher6 = new Pitcher
-            {
-                Name = "Zach Davies"
-            };
-
-            AddPitcher(driver, pitcher6);
 
             //driver.Navigate().GoToUrl($"{PlayerPage}");
             //var dataPitchers = driver.FindElements(By.XPath("//table[contains(@class, 'Table-interactive')]/tbody/tr"));
