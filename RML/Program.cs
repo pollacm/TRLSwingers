@@ -119,7 +119,28 @@ namespace TRLSwingers
             };
 
             AddPitcher(driver, pitcher2);
-            
+
+
+            //var pitcher5 = new Pitcher
+            //{
+            //    Name = "Sonny Gray"
+            //};
+
+            //AddPitcher(driver, pitcher5);
+
+            //var pitcher3 = new Pitcher
+            //{
+            //    Name = "Anibal Sanchez"
+            //};
+
+            //AddPitcher(driver, pitcher3);
+
+            //var pitcher6 = new Pitcher
+            //{
+            //    Name = "Griffin Canning"
+            //};
+
+            //AddPitcher(driver, pitcher6);
 
             //driver.Navigate().GoToUrl($"{PlayerPage}");
             //var dataPitchers = driver.FindElements(By.XPath("//table[contains(@class, 'Table-interactive')]/tbody/tr"));
