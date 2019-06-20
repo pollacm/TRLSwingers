@@ -101,46 +101,52 @@ namespace TRLSwingers
 
             var pitcher1 = new Pitcher
             {
-                Name = "Madison Bumgarner"
+                Name = "Madison Bumgarner",
+                DateToAdd = "06/20"
             };
 
             AddPitcher(driver, pitcher1);
 
             var pitcher4 = new Pitcher
             {
-                Name = "Dylan Bundy"
+                Name = "Dylan Bundy",
+                DateToAdd = "06/20"
             };
 
             AddPitcher(driver, pitcher4);
 
             var pitcher2 = new Pitcher
             {
-                Name = "Tanner Roark"
+                Name = "Tanner Roark",
+                DateToAdd = "06/20"
             };
 
             AddPitcher(driver, pitcher2);
 
 
-            //var pitcher5 = new Pitcher
-            //{
-            //    Name = "Sonny Gray"
-            //};
+            var pitcher5 = new Pitcher
+            {
+                Name = "Sonny Gray",
+                DateToAdd = "06/21"
+            };
 
-            //AddPitcher(driver, pitcher5);
+            AddPitcher(driver, pitcher5);
 
-            //var pitcher3 = new Pitcher
-            //{
-            //    Name = "Anibal Sanchez"
-            //};
+            var pitcher3 = new Pitcher
+            {
+                Name = "Anibal Sanchez",
+                DateToAdd = "06/21"
+            };
 
-            //AddPitcher(driver, pitcher3);
+            AddPitcher(driver, pitcher3);
 
-            //var pitcher6 = new Pitcher
-            //{
-            //    Name = "Griffin Canning"
-            //};
+            var pitcher6 = new Pitcher
+            {
+                Name = "Griffin Canning",
+                DateToAdd = "06/21"
+            };
 
-            //AddPitcher(driver, pitcher6);
+            AddPitcher(driver, pitcher6);
 
             //driver.Navigate().GoToUrl($"{PlayerPage}");
             //var dataPitchers = driver.FindElements(By.XPath("//table[contains(@class, 'Table-interactive')]/tbody/tr"));
@@ -284,6 +290,11 @@ namespace TRLSwingers
         {
             if (pitcher.LastName == string.Empty)
                 return false;
+
+            if (!string.IsNullOrEmpty(pitcher.DateToAdd) && pitcher.DateToAdd != DateTime.Now.ToString("MM/dd"))
+            {
+                return false;
+            }
 
             var pitcherSwapped = false;
             driver.Navigate().GoToUrl($"{PlayerPage}");

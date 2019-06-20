@@ -9,6 +9,7 @@ namespace TRLSwingers.Pitchers
         public double Average { get; set; }
         public bool Added { get; set; }
         public string Position { get; set; }
+        public string DateToAdd { get; set; }
         public double Value
         {
             get { return Average + (Stars * .5); }
