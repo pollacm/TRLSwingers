@@ -29,7 +29,7 @@ namespace TRLSwingers
             "Verlander",
             "Berríos",
             "Clevinger",
-            "Montas",
+            "Allen",
             "Lynn",
             "Giolito"
         };
@@ -101,49 +101,57 @@ namespace TRLSwingers
 
             var pitcher1 = new Pitcher
             {
-                Name = "Madison Bumgarner",
-                DateToAdd = "06/20"
+                Name = "Matthew Boyd",
+                DateToAdd = "06/26"
             };
 
             AddPitcher(driver, pitcher1);
 
             var pitcher4 = new Pitcher
             {
-                Name = "Dylan Bundy",
-                DateToAdd = "06/20"
+                Name = "Jakob Junis",
+                DateToAdd = "06/26"
             };
 
             AddPitcher(driver, pitcher4);
 
             var pitcher2 = new Pitcher
             {
-                Name = "Tanner Roark",
-                DateToAdd = "06/20"
+                Name = "Nick Pivetta",
+                DateToAdd = "06/26"
             };
 
             AddPitcher(driver, pitcher2);
 
+            var pitcher7 = new Pitcher
+            {
+                Name = "Dylan Bundy",
+                DateToAdd = "06/26"
+            };
+
+            AddPitcher(driver, pitcher7);
+
 
             var pitcher5 = new Pitcher
             {
-                Name = "Sonny Gray",
-                DateToAdd = "06/21"
+                Name = "Marco Gonzales",
+                DateToAdd = "06/25"
             };
 
             AddPitcher(driver, pitcher5);
 
             var pitcher3 = new Pitcher
             {
-                Name = "Anibal Sanchez",
-                DateToAdd = "06/21"
+                Name = "David Price",
+                DateToAdd = "06/25"
             };
 
             AddPitcher(driver, pitcher3);
 
             var pitcher6 = new Pitcher
             {
-                Name = "Griffin Canning",
-                DateToAdd = "06/21"
+                Name = "Logan Allen",
+                DateToAdd = "06/25"
             };
 
             AddPitcher(driver, pitcher6);
@@ -288,68 +296,76 @@ namespace TRLSwingers
 
         private static bool AddPitcher(ChromeDriver driver, Pitcher pitcher)
         {
-            if (pitcher.LastName == string.Empty)
-                return false;
-
-            if (!string.IsNullOrEmpty(pitcher.DateToAdd) && pitcher.DateToAdd != DateTime.Now.ToString("MM/dd"))
-            {
-                return false;
-            }
-
             var pitcherSwapped = false;
-            driver.Navigate().GoToUrl($"{PlayerPage}");
-            //find that pitcher
-            var addPitcherButtons =
-                driver.FindElements(By.XPath($"//table[contains(@class, 'Table-interactive')]/tbody/tr/td[2]/div/div/div/a[contains(text(), '{pitcher.LastName}')]/parent::div/parent::div/parent::div/parent::td/parent::tr/td[3]/div/a"));
-            if (addPitcherButtons.Any())
+
+            for (var attempts = 0; attempts < 5; attempts++)
             {
-                var addPitchersButtonSuccess = false;
-                while (!addPitchersButtonSuccess)
+                if (pitcher.LastName == string.Empty)
+                    return false;
+
+                if (!string.IsNullOrEmpty(pitcher.DateToAdd) && pitcher.DateToAdd != DateTime.Now.ToString("MM/dd"))
                 {
-                    try
-                    {
-                        addPitcherButtons.First().Click();
-                        addPitchersButtonSuccess = true;
-                    }
-                    catch
-                    {
-                        Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
-                    }
+                    return false;
                 }
 
-                var hasPitchersThatCanBeRemoved = ClickButtonToRemovePitcher(driver);
-
-                if (hasPitchersThatCanBeRemoved)
+                driver.Navigate().GoToUrl($"{PlayerPage}");
+                //find that pitcher
+                var addPitcherButtons =
+                    driver.FindElements(By.XPath($"//table[contains(@class, 'Table-interactive')]/tbody/tr/td[2]/div/div/div/a[contains(text(), '{pitcher.LastName}')]/parent::div/parent::div/parent::div/parent::td/parent::tr/td[3]/div/a"));
+                if (addPitcherButtons.Any())
                 {
-                    var addedRemovePitcher = false;
-                    var addedRemovePitcherCount = 1;
-                    while (!addedRemovePitcher)
+                    var addPitchersButtonSuccess = false;
+                    while (!addPitchersButtonSuccess)
                     {
-                        if (addedRemovePitcherCount % 5 == 0)
-                        {
-                            ClickButtonToRemovePitcher(driver);
-                        }
-
                         try
                         {
-                            driver.FindElement(By.XPath("//input[@id='submit-add-drop-button']")).Submit();
-                            Thread.Sleep(new TimeSpan(0, 0, 0, 1));
-                            addedRemovePitcher = true;
+                            addPitcherButtons.First().Click();
+                            addPitchersButtonSuccess = true;
                         }
                         catch
                         {
                             Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
                         }
-
-                        addedRemovePitcherCount++;
                     }
 
-                    var confirmationMessage = driver.FindElements(By.XPath("//div[contains(@class,'Alert-confirmation')]"));
-                    if (confirmationMessage.Any())
+                    var hasPitchersThatCanBeRemoved = ClickButtonToRemovePitcher(driver);
+
+                    if (hasPitchersThatCanBeRemoved)
                     {
-                        pitcherSwapped = true;
-                        pitcher.Added = true;
+                        var addedRemovePitcher = false;
+                        var addedRemovePitcherCount = 1;
+                        while (!addedRemovePitcher)
+                        {
+                            if (addedRemovePitcherCount % 5 == 0)
+                            {
+                                ClickButtonToRemovePitcher(driver);
+                            }
+
+                            try
+                            {
+                                driver.FindElement(By.XPath("//input[@id='submit-add-drop-button']")).Submit();
+                                Thread.Sleep(new TimeSpan(0, 0, 0, 1));
+                                addedRemovePitcher = true;
+                            }
+                            catch
+                            {
+                                Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                            }
+
+                            addedRemovePitcherCount++;
+                        }
+
+                        var confirmationMessage = driver.FindElements(By.XPath("//div[contains(@class,'Alert-confirmation')]"));
+                        if (confirmationMessage.Any())
+                        {
+                            pitcherSwapped = true;
+                            pitcher.Added = true;
+                        }
                     }
+                }
+                else
+                {
+                    return false;
                 }
             }
 
