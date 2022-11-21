@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace TRLSwingers
+namespace TRLNFL
 {
     public static class Extensions
     {

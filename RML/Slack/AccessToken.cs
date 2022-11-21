@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TRLSwingers.Slack
+namespace TRLNFL.Slack
 {
     public class AccessToken
     {

@@ -1,4 +1,4 @@
-﻿namespace TRLSwingers.Slack
+﻿namespace TRLNFL.Slack
 {
     public static class SlackClientTest
     {

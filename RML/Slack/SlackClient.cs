@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace TRLSwingers.Slack
+namespace TRLNFL.Slack
 {
     //A simple C# class to post messages to a Slack channel
     //Note: This class uses the Newtonsoft Json.NET serializer available via NuGet
